@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "serve": "node ./service/index.js",
-    "serve:dev": "node --inspect-brk ./service/index.js"
+    "serve:dev": "node --inspect ./service/index.js"
   },
   "devDependencies": {
     "express": "^4.18.2",

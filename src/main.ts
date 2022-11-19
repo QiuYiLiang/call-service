@@ -3,9 +3,17 @@ import { makeNew } from "./service";
 export const newA = makeNew("A");
 
 const [a] = await newA();
+(window as any).a = a;
 
 const d = await a.add(1, 2).$();
+console.log(d);
 const c = await a.add(222, 111).$();
+console.log(c);
 const data = await a.data.$();
 
-console.log(d, c, data);
+const sum = async (num1: number, num2: number) => {
+  console.log(await a.add(num1, num2).$());
+};
+
+(window as any).sum = sum;
+console.log(data);

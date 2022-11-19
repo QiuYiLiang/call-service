@@ -39,11 +39,14 @@ const getService = (serviceName) => {
   return serviceMap.get(serviceName);
 };
 
-const callServiceName = (serviceName, paths) => {
+const callServiceName = async (serviceName, paths) => {
   try {
-    return paths.reduce((target, path) => {
+    return await paths.reduce(async (targetPromise, path) => {
+      const target = await targetPromise;
       const a =
-        typeof path !== "string" ? target[path[0]](...path[1]) : target[path];
+        typeof path !== "string"
+          ? await target[path[0]](...path[1])
+          : target[path];
       return a;
     }, getService(serviceName));
   } catch (e) {
@@ -59,14 +62,16 @@ const startServer = () => {
 
   wss.on("connection", (ws) => {
     console.log("连接成功！");
-    ws.on("message", (dataStr) => {
+    ws.on("message", async (dataStr) => {
+      debugger;
       const [requestId, serviceName, paths] = JSON.parse(dataStr);
-      // console.log(requestId, serviceName, paths);
-      wss.clients.forEach((client) => {
-        client.send(
-          JSON.stringify([requestId, callServiceName(serviceName, paths)])
-        );
-      });
+
+      const msg = JSON.stringify([
+        requestId,
+        await callServiceName(serviceName, paths),
+      ]);
+
+      ws.send(msg);
     });
   });
 
