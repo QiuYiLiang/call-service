@@ -1,0 +1,14 @@
+{
+  "name": "call-service",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "serve": "node ./server.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3",
+    "express": "^4.18.2"
+  }
+}
