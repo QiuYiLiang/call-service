@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "serve": "node ./server.js"
+    "serve": "node ./service/index.js",
+    "serve:dev": "node --inspect-brk ./service/index.js"
   },
   "devDependencies": {
     "typescript": "^4.6.4",

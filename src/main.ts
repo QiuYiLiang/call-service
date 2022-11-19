@@ -1,8 +1,11 @@
-import { Service } from "./service";
+import { makeNew } from "./service";
 
-const aService = Service("AService");
+export const newA = makeNew("A");
 
-await aService.new("1").add(1, 2).$();
-await aService.get("1").add(3333, 2222).$();
-const data = await aService.get("1").data.$();
-console.log(data);
+const [a] = await newA();
+
+const d = await a.add(1, 2).$();
+const c = await a.add(222, 111).$();
+const data = await a.data.$();
+
+console.log(d, c, data);

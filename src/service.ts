@@ -65,3 +65,15 @@ export const Service = (serviceName: string, delay?: number): any => {
 
   return makeProxy("", 0);
 };
+
+export const makeNew = (ClassName: string) => {
+  return async (...args: any[]) => {
+    const service = Service(ClassName);
+    const id = ClassName + Date.now() + Math.random().toString(36).slice(-10);
+
+    await service.new(id, ...args).$();
+
+    return [service.get(id), () => service.del(id)];
+  };
+};
+
