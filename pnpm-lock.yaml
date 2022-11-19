@@ -4,6 +4,10 @@ specifiers:
   express: ^4.18.2
   typescript: ^4.6.4
   vite: ^3.2.3
+  ws: ^8.11.0
+
+dependencies:
+  ws: 8.11.0
 
 devDependencies:
   express: 4.18.2
@@ -742,3 +746,16 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /ws/8.11.0:
+    resolution: {integrity: sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false

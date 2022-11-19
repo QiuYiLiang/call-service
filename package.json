@@ -8,8 +8,11 @@
     "serve:dev": "node --inspect-brk ./service/index.js"
   },
   "devDependencies": {
+    "express": "^4.18.2",
     "typescript": "^4.6.4",
-    "vite": "^3.2.3",
-    "express": "^4.18.2"
+    "vite": "^3.2.3"
+  },
+  "dependencies": {
+    "ws": "^8.11.0"
   }
 }
