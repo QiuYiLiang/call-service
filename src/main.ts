@@ -1,9 +1,8 @@
 import { Service } from "./service";
 
-const aaa = Service("aaa");
+const aService = Service("AService");
 
-const a = await aaa.a.b.c(1123, 123).d().e().$();
-console.log(1, a);
-
-const c = await aaa.e.sum(1111, 2222).$();
-console.log(2, c);
+await aService.new("1").add(1, 2).$();
+await aService.get("1").add(3333, 2222).$();
+const data = await aService.get("1").data.$();
+console.log(data);
