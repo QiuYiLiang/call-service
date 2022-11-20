@@ -1,8 +1,4 @@
-import { makeNew, setServiceConfig } from "./service";
-
-setServiceConfig({ wsService: "ws://127.0.0.1:3000", limitConnect: 3 });
-
-export const newA = makeNew("A");
+import { newA, newB } from "./init-service";
 
 const [a] = await newA();
 (window as any).a = a;
@@ -19,3 +15,12 @@ const sum = async (num1: number, num2: number) => {
 
 (window as any).sum = sum;
 console.log(data);
+
+const [b] = await newB(1, 3, 5, 7, 9);
+const f = await b.sum(222, 111).$();
+console.log(f);
+
+const g = await b.sum(222, 111).$();
+console.log(g);
+const data2 = await b.source.$();
+console.log(data2);

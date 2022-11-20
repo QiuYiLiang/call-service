@@ -1,13 +1,17 @@
-class A {
-  data = [];
-  async add(a, b) {
+class B {
+  id;
+  source = [];
+  constructor(...args) {
+    this.source.push(...args);
+  }
+  async sum(a, b) {
     const sum = a + b;
-    this.data.push(sum);
+    this.source.push(sum);
 
     await new Promise((reslove) => {
       setTimeout(() => {
         reslove();
-      }, 1000);
+      }, 2000);
     });
 
     return sum;
@@ -15,5 +19,5 @@ class A {
 }
 
 module.exports = {
-  A,
+  B,
 };
