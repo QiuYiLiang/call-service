@@ -55,7 +55,7 @@ const callServiceName = async (serviceName, paths) => {
   }
 };
 
-const startServer = () => {
+const startServer = (port = 3000) => {
   const app = express();
   const server = http.createServer(app);
   const wss = new WebSocket.Server({ server });
@@ -63,7 +63,6 @@ const startServer = () => {
   wss.on("connection", (ws) => {
     console.log("连接成功！");
     ws.on("message", async (dataStr) => {
-      debugger;
       const [requestId, serviceName, paths] = JSON.parse(dataStr);
 
       const msg = JSON.stringify([
@@ -75,7 +74,7 @@ const startServer = () => {
     });
   });
 
-  server.listen(3000, function listening() {
+  server.listen(port, function listening() {
     console.log("服务器启动成功！");
   });
 };

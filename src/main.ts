@@ -1,4 +1,6 @@
-import { makeNew } from "./service";
+import { makeNew, setServiceConfig } from "./service";
+
+setServiceConfig({ wsService: "ws://127.0.0.1:3000", limitConnect: 10 });
 
 export const newA = makeNew("A");
 
