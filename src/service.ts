@@ -30,6 +30,10 @@ const sendMap = new Map<
 >();
 
 const send = async (serviceName: string, paths: any[], delay = 10000) => {
+  if (limitConnect === 0) {
+    return null;
+  }
+
   const socket = ws ? ws : await startSocket();
 
   if (!socket) {
