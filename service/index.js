@@ -5,4 +5,5 @@ const { registerCls, startServer } = require("./service");
 registerCls("A", A);
 registerCls("B", B);
 
-startServer();
+startServer(3000);
+startServer(3001);
