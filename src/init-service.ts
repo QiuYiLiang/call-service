@@ -1,6 +1,12 @@
-import { makeNew, setServiceConfig } from "./service";
+import { createRemoteServices } from "./remote-services";
 
-setServiceConfig({ wsService: "ws://127.0.0.1:3000", limitConnect: 3 });
+const remoteServices = createRemoteServices("ws://127.0.0.1:3000", {
+  limitConnect: 3,
+});
 
-export const newA = makeNew("A");
-export const newB = makeNew("B");
+export const newA = remoteServices.getClsService("A");
+export const newB = remoteServices.getClsService("B");
+
+const remoteServices2 = createRemoteServices("ws://127.0.0.1:3000");
+
+export const newA2 = remoteServices2.getClsService("A");

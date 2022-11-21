@@ -1,4 +1,4 @@
-import { newA, newB } from "./init-service";
+import { newA, newA2, newB } from "./init-service";
 
 const [a] = await newA();
 (window as any).a = a;
@@ -24,3 +24,10 @@ const g = await b.sum(222, 111).$();
 console.log(g);
 const data2 = await b.source.$();
 console.log(data2);
+
+const [a2] = await newA2();
+
+const d2 = await a2.add(11111, 2).$();
+console.log(d2);
+const c2 = await a2.add(22123123, 111).$();
+console.log(c2);
