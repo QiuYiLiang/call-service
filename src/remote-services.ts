@@ -87,7 +87,6 @@ class Service {
 
 class RemoteServices {
   private ws: WebSocket | null = null;
-  private wsService: string = "";
   limitConnect: number = 3;
   private timeConnect: number = 0;
   sends = new Map<
@@ -98,9 +97,8 @@ class RemoteServices {
     }
   >();
 
-  constructor(wsService: string, options?: RemoteServicesOptions) {
+  constructor(public wsService: string, options?: RemoteServicesOptions) {
     const { limitConnect } = options || {};
-    this.wsService = wsService;
     if (limitConnect) {
       this.limitConnect = limitConnect;
     }
