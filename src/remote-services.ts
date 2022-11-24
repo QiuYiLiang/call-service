@@ -186,3 +186,65 @@ export const createRemoteServices = (
     getService: remoteServices.getService.bind(remoteServices),
   };
 };
+
+export const fileToBase64File = async (file: File) => {
+  const { lastModified, name, size, webkitRelativePath } = file;
+  const base64 = await blobToBase64(file);
+  return {
+    lastModified,
+    name,
+    size,
+    webkitRelativePath,
+    base64,
+  };
+};
+
+export const blobToBase64 = (blob: Blob) =>
+  new Promise((reslove) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onload = (e: any) => {
+      reslove(e.target.result);
+    };
+  });
+
+interface Base64File {
+  lastModified: number;
+  name: string;
+  size: number;
+  webkitRelativePath: string;
+  base64: string;
+}
+
+export const downloadBase64File = (
+  base64FileOrBase64: Base64File | string,
+  fileName?: string
+) => {
+  const { base64, name } =
+    typeof base64FileOrBase64 === "string"
+      ? { base64: base64FileOrBase64, name: fileName }
+      : base64FileOrBase64;
+  if (!name) {
+    console.log("无法下载没有名称的文件!");
+
+    return;
+  }
+  const parts = base64.split(";base64,");
+  const contentType = parts[0].split(":")[1];
+  const raw = window.atob(parts[1]);
+  const rawLength = raw.length;
+  const uInt8Array = new Uint8Array(rawLength);
+  for (let i = 0; i < rawLength; ++i) {
+    uInt8Array[i] = raw.charCodeAt(i);
+  }
+  const blob = new Blob([uInt8Array], {
+    type: contentType,
+  });
+
+  const aLink = document.createElement("a");
+  aLink.download = fileName ?? name;
+  aLink.href = URL.createObjectURL(blob);
+  aLink.click();
+
+  return URL.createObjectURL(blob);
+};

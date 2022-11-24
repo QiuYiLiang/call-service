@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 class B {
   id;
   source = [];
@@ -15,6 +17,17 @@ class B {
     });
 
     return sum;
+  }
+  saveFile(base64File) {
+    const { base64, name } = base64File;
+    const parts = base64.split(";base64,");
+    // const contentType = parts[0].split(":")[1];
+    const raw = parts[1];
+
+    var dataBuffer = Buffer.from(raw, "base64");
+    fs.writeFileSync(path.resolve(__dirname, `./${name}`), dataBuffer);
+
+    return "ok";
   }
 }
 
